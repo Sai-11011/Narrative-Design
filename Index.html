@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Narrative Designer Portfolio</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Cinzel', 'serif'],
+                        body: ['Lora', 'serif'],
+                        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'], // For small ui elements
+                    },
+                    colors: {
+                        dark: '#0A0A0C',
+                        surface: '#151518',
+                        ivory: '#E6E0D5',
+                        muted: '#A6A3A0',
+                        gold: {
+                            400: '#D4B872',
+                            500: '#C5A059',
+                            900: '#3A2A12'
+                        },
+                        crimson: '#6B2028'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: theme('colors.dark');
+            color: theme('colors.ivory');
+            overflow-x: hidden;
+        }
+        
+        .glass-nav {
+            background: rgba(10, 10, 12, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+        }
+
+        /* Focus outlines for accessibility */
+        *:focus-visible {
+            outline: 2px solid theme('colors.gold.500');
+            outline-offset: 4px;
+        }
+
+        /* Screenplay format styling */
+        .script-container {
+            background: theme('colors.surface');
+            border-left: 2px solid theme('colors.gold.500');
+            font-family: theme('fontFamily.mono');
+            line-height: 1.6;
+        }
+        .script-scene-heading {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: theme('colors.ivory');
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(230, 224, 213, 0.1);
+            padding-bottom: 0.5rem;
+        }
+        .script-action {
+            margin-bottom: 1.5rem;
+            color: theme('colors.muted');
+        }
+        .script-character {
+            text-align: center;
+            text-transform: uppercase;
+            margin-top: 1.5rem;
+            margin-bottom: 0.25rem;
+            color: theme('colors.ivory');
+            font-weight: bold;
+        }
+        .script-parenthetical {
+            text-align: center;
+            font-style: italic;
+            color: theme('colors.muted');
+            margin-bottom: 0.25rem;
+        }
+        .script-dialogue {
+            width: 75%;
+            margin: 0 auto;
+            margin-bottom: 1.5rem;
+            color: theme('colors.ivory');
+        }
+        .script-player-option {
+            margin-left: 10%;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 2px solid theme('colors.crimson');
+            color: theme('colors.gold.400');
+        }
+        .script-branch {
+            margin-left: 10%;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: theme('colors.muted');
+            font-size: 0.9em;
+        }
+        .script-designer-note {
+            background: rgba(197, 160, 89, 0.05);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            color: theme('colors.ivory');
+            font-family: theme('fontFamily.body');
+        }
+
+        /* Subtle gradients */
+        .vignette-overlay {
+            background: radial-gradient(circle at center, transparent 30%, theme('colors.dark') 100%);
+        }
+        
+        .ornamental-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, theme('colors.gold.500'), transparent);
+            opacity: 0.3;
+        }
+
+        .hover-gold-glow:hover {
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.1);
+            border-color: rgba(197, 160, 89, 0.4);
+        }
+    </style>
+</head>
+<body class="font-body antialiased selection:bg-gold-900 selection:text-gold-400">
+
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#hero" class="font-heading font-bold text-xl tracking-widest text-ivory hover:text-gold-400 transition-colors uppercase">
+                Sai Srinivas Jammana
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 text-xs uppercase tracking-[0.2em] font-sans">
+                <a href="#selected-work" class="text-muted hover:text-gold-400 transition-colors">Selected Work</a>
+                <a href="#writing-sample" class="text-muted hover:text-gold-400 transition-colors">Writing Sample</a>
+                <a href="#about" class="text-muted hover:text-gold-400 transition-colors">About</a>
+                <a href="#contact" class="text-gold-500 hover:text-ivory transition-colors font-bold">Contact</a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-ivory hover:text-gold-400 focus:outline-none p-2" id="mobile-menu-btn" aria-label="Toggle navigation">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-surface border-b border-gold-500/20 absolute w-full">
+            <div class="px-6 py-4 flex flex-col space-y-6 text-sm uppercase tracking-widest font-sans">
+                <a href="#selected-work" class="text-muted hover:text-gold-400 mobile-link">Selected Work</a>
+                <a href="#writing-sample" class="text-muted hover:text-gold-400 mobile-link">Writing Sample</a>
+                <a href="#about" class="text-muted hover:text-gold-400 mobile-link">About</a>
+                <a href="#contact" class="text-gold-500 hover:text-ivory mobile-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="hero" class="relative min-h-[90vh] flex items-center pt-20">
+            <!-- Background Image Placeholder -->
+            <div class="absolute inset-0 z-0">
+                <!-- Background Image Container -->
+                <div id="bg-container" class="absolute inset-0 z-0">
+                    <img id="bg-front" src="" alt="Dark Fantasy" class="absolute inset-0 w-full h-full object-cover object-center brightness-110 opacity-100 transition-opacity duration-1000">
+                    <img id="bg-back" src="" alt="Dark Fantasy" class="absolute inset-0 w-full h-full object-cover object-center brightness-110 opacity-0 transition-opacity duration-1000">
+                </div>
+
+                <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/90 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-dark"></div>
+            </div>
+            
+            <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+                <div class="max-w-2xl space-y-8">
+                    <p class="font-sans text-gold-500 text-xs font-bold tracking-[0.3em] uppercase">
+                        Narrative Design / Game Worldbuilding
+                    </p>
+                    <h1 class="font-heading text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-ivory">
+                        I build worlds filled with secrets, characters shaped by their choices, and stories that unfold through play.
+                    </h1>
+                    <p class="text-lg md:text-xl text-muted font-body leading-relaxed max-w-xl">
+                        From dark fantasy worlds to mysteries built around forgotten truths, I explore how worldbuilding, character motivations, and meaningful player choices come together to create memorable experiences. I enjoy crafting stories that invite players to uncover secrets, question what they know, and shape the journey ahead.
+                    </p>
+                    <div class="pt-6 flex flex-wrap items-center gap-6">
+                        <a href="#selected-work" class="inline-flex items-center px-8 py-4 bg-gold-500/10 border border-gold-500/50 text-gold-400 hover:bg-gold-500 hover:text-dark transition-all duration-300 font-sans tracking-[0.15em] uppercase text-xs font-bold">
+                            Explore My Work
+                        </a>
+                        <a href="#writing-sample" class="inline-flex items-center text-ivory hover:text-gold-400 transition-colors font-sans tracking-widest uppercase text-xs underline underline-offset-4 decoration-gold-500/30">
+                            Read a Writing Sample
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-6 lg:left-auto lg:right-10 flex flex-col items-center space-y-2 opacity-50">
+                <span class="font-sans text-[10px] tracking-[0.2em] text-ivory uppercase">Scroll</span>
+                <div class="w-[1px] h-12 bg-gradient-to-b from-gold-500 to-transparent"></div>
+            </div>
+        </section>
+
+        <section id="selected-work" class="py-24 px-6 relative bg-dark">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col items-center mb-16 text-center space-y-4">
+                    <h2 class="font-heading text-3xl md:text-4xl text-ivory tracking-wide">Selected Worlds</h2>
+                    <div class="w-24 ornamental-divider"></div>
+                </div>
+
+                <!-- Featured Project (Full Width/Large) -->
+                <div class="mb-12 group cursor-pointer">
+                    <a href="#case-study-template" class="block bg-surface border border-white/5 hover-gold-glow transition-all duration-500 overflow-hidden relative grid grid-cols-1 lg:grid-cols-2 group">
+                        <div class="h-64 lg:h-auto w-full relative overflow-hidden">
+                            <img src="Assets/Assasin.png" alt="[Placeholder: Featured Project Art]" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                        </div>
+                        <div class="p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+                            <span class="font-sans text-gold-500 text-xs font-bold tracking-[0.2em] uppercase mb-4 block">[Placeholder: Genre / Format]</span>
+                            <h3 class="font-heading text-3xl md:text-4xl text-ivory mb-4">Project 1: JOAT</h3>
+                            <p class="text-muted leading-relaxed mb-8">
+                                [Placeholder: One or two-line summary of the core premise, player role, and narrative hook for this featured project. Keep it punchy and engaging.]
+                            </p>
+                            <div class="flex flex-wrap gap-3 mb-10">
+                                <span class="px-3 py-1 border border-white/10 text-xs font-sans tracking-wider text-muted rounded-sm">[Tag 1]</span>
+                                <span class="px-3 py-1 border border-white/10 text-xs font-sans tracking-wider text-muted rounded-sm">[Tag 2]</span>
+                                <span class="px-3 py-1 border border-white/10 text-xs font-sans tracking-wider text-muted rounded-sm">[Tag 3]</span>
+                            </div>
+                            <div class="mt-auto">
+                                <span class="inline-flex items-center text-ivory group-hover:text-gold-400 font-sans text-xs tracking-[0.15em] uppercase transition-colors">
+                                    View Case Study <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- 3-Column Grid for other projects -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 2: Phantom Coven -->
+                    <a href="#case-study-template" class="block bg-surface border border-white/5 hover-gold-glow transition-all duration-300 flex flex-col group">
+                        <div class="h-48 w-full relative overflow-hidden">
+                            <img src="https://placehold.co/600x400/151518/C5A059?text=Phantom+Coven+Art" alt="[Placeholder: Phantom Coven Art]" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <span class="font-sans text-gold-500 text-[10px] font-bold tracking-[0.2em] uppercase mb-3">[Placeholder: Genre]</span>
+                            <h3 class="font-heading text-2xl text-ivory mb-3">Phantom Coven</h3>
+                            <p class="text-muted text-sm leading-relaxed mb-6 flex-grow">
+                                [Placeholder: Short summary of the narrative premise and mechanics for this distinct project.]
+                            </p>
+                            <div class="flex items-center text-ivory group-hover:text-gold-400 font-sans text-xs tracking-widest uppercase transition-colors mt-4 pt-4 border-t border-white/5">
+                                View Case Study
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 3: Sinking Regression -->
+                    <a href="#case-study-template" class="block bg-surface border border-white/5 hover-gold-glow transition-all duration-300 flex flex-col group">
+                        <div class="h-48 w-full relative overflow-hidden">
+                            <img src="https://placehold.co/600x400/151518/6B2028?text=Sinking+Regression+Art" alt="[Placeholder: Sinking Regression Art]" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <span class="font-sans text-gold-500 text-[10px] font-bold tracking-[0.2em] uppercase mb-3">[Placeholder: Genre]</span>
+                            <h3 class="font-heading text-2xl text-ivory mb-3">Sinking Regression</h3>
+                            <p class="text-muted text-sm leading-relaxed mb-6 flex-grow">
+                                [Placeholder: Short summary highlighting psychological horror, sanity mechanics, or consequence systems.]
+                            </p>
+                            <div class="flex items-center text-ivory group-hover:text-gold-400 font-sans text-xs tracking-widest uppercase transition-colors mt-4 pt-4 border-t border-white/5">
+                                View Case Study
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 4: RealmBound -->
+                    <a href="#case-study-template" class="block bg-surface border border-white/5 hover-gold-glow transition-all duration-300 flex flex-col group">
+                        <div class="h-48 w-full relative overflow-hidden">
+                            <img src="https://placehold.co/600x400/151518/A6A3A0?text=RealmBound+Art" alt="[Placeholder: RealmBound Art]" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <span class="font-sans text-gold-500 text-[10px] font-bold tracking-[0.2em] uppercase mb-3">[Placeholder: Genre]</span>
+                            <h3 class="font-heading text-2xl text-ivory mb-3">RealmBound</h3>
+                            <p class="text-muted text-sm leading-relaxed mb-6 flex-grow">
+                                [Placeholder: Short summary highlighting dense lore integration, worldbuilding, and political history woven into quests.]
+                            </p>
+                            <div class="flex items-center text-ivory group-hover:text-gold-400 font-sans text-xs tracking-widest uppercase transition-colors mt-4 pt-4 border-t border-white/5">
+                                View Case Study
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="case-study-template" class="py-12 bg-surface/50 border-y border-white/5">
+            <div class="max-w-7xl mx-auto px-6">
+                <!-- Template Alert Label (Can be removed in production) -->
+                <div class="mb-8 p-4 border border-crimson/50 bg-crimson/10 text-ivory text-sm font-sans flex items-start">
+                    <i data-lucide="info" class="w-5 h-5 mr-3 text-crimson mt-0.5"></i>
+                    <div>
+                        <strong>Template View:</strong> This section represents the visual layout for a single project's detail page. When building the final site, this content would either populate a modal, be its own HTML page, or expand below a clicked project.
+                    </div>
+                </div>
+
+                <!-- Cinematic Banner -->
+                <div class="w-full h-64 md:h-96 relative mb-12 border border-white/5">
+                    <img src="https://placehold.co/1200x600/0A0A0C/C5A059?text=Case+Study+Cinematic+Banner" alt="[Placeholder: Project Banner]" class="w-full h-full object-cover opacity-70">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent"></div>
+                    <div class="absolute bottom-8 left-8 right-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                        <div>
+                            <h2 class="font-heading text-4xl md:text-5xl text-ivory mb-2">[Project Title]</h2>
+                            <p class="font-sans text-gold-400 tracking-widest uppercase text-sm">[Genre / Format]</p>
+                        </div>
+                        <div class="flex flex-col gap-1 text-sm font-sans text-muted bg-dark/80 p-4 border border-white/10 backdrop-blur-sm">
+                            <div><span class="text-ivory font-bold w-16 inline-block">Role:</span> [Placeholder: Lead Writer]</div>
+                            <div><span class="text-ivory font-bold w-16 inline-block">Status:</span> [Placeholder: In Development]</div>
+                            <div><span class="text-ivory font-bold w-16 inline-block">Engine:</span> [Placeholder: Custom / Unity]</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                    <!-- Main Content Flow -->
+                    <div class="lg:col-span-8 space-y-12">
+                        <!-- Premise & World -->
+                        <div class="prose prose-invert prose-lg max-w-none font-body text-muted">
+                            <h3 class="font-heading text-2xl text-ivory border-b border-white/10 pb-2 mb-4">The Premise</h3>
+                            <p>[Placeholder: Detailed paragraph explaining the core hook of the game. What is the central conflict the player faces immediately upon starting?]</p>
+                            
+                            <h3 class="font-heading text-2xl text-ivory border-b border-white/10 pb-2 mb-4 mt-12">World & Architecture</h3>
+                            <p>[Placeholder: Describe the setting, atmosphere, and the rules of the world. Mention key factions, locations, or historical events that matter to the current story.]</p>
+                        </div>
+
+                        <!-- Character Callout -->
+                        <div class="bg-dark border border-white/5 p-8 flex flex-col md:flex-row gap-8 items-center">
+                            <div class="w-32 h-32 shrink-0 rounded-full border border-gold-500/30 overflow-hidden">
+                                <img src="https://placehold.co/200x200/151518/A6A3A0?text=Portrait" alt="[Placeholder: Character Portrait]" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-heading text-xl text-ivory mb-1">[Placeholder: Key Character Name]</h4>
+                                <p class="text-xs font-sans text-crimson tracking-widest uppercase mb-3">[Placeholder: Faction / Role]</p>
+                                <p class="text-sm text-muted font-body leading-relaxed">
+                                    "[Placeholder: A brief, punchy quote that establishes voice.]" <br><br>
+                                    [Placeholder: Explain the character's internal conflict and how their arc intersects with the player's journey.]
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Narrative Arc / Quest Breakdown -->
+                        <div class="prose prose-invert prose-lg max-w-none font-body text-muted">
+                            <h3 class="font-heading text-2xl text-ivory border-b border-white/10 pb-2 mb-4">Quest Structure & Narrative Arc</h3>
+                            <p>[Placeholder: Discuss the overarching structure of the story. How do player choices affect the outcome? Provide an example of a specific branching quest line.]</p>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar / Supporting Material -->
+                    <div class="lg:col-span-4 space-y-8">
+                        <div class="border-t-2 border-gold-500 pt-6">
+                            <h4 class="font-heading text-lg text-ivory mb-4">Design Rationale</h4>
+                            <p class="text-sm font-body text-muted leading-relaxed mb-4">
+                                [Placeholder: Briefly explain *why* you designed a specific element this way. E.g., "I structured the opening sequence to immediately force the player into a moral dilemma rather than dumping lore."]
+                            </p>
+                        </div>
+                        
+                        <!-- Supporting Imagery -->
+                        <div class="space-y-4">
+                            <img src="https://placehold.co/600x400/0A0A0C/C5A059?text=Screenshot+or+Diagram" alt="[Placeholder: Diagram or Concept Art]" class="w-full border border-white/10">
+                            <p class="text-xs font-sans text-muted italic">[Placeholder: Caption describing the diagram, flowchart, or screenshot.]</p>
+                        </div>
+
+                        <a href="#" class="inline-flex items-center justify-center w-full px-6 py-4 bg-white/5 hover:bg-gold-500/10 border border-white/10 hover:border-gold-500/50 text-ivory hover:text-gold-400 transition-all font-sans tracking-widest uppercase text-xs">
+                            <i data-lucide="play-circle" class="w-4 h-4 mr-3"></i>
+                            Playable Prototype / Build
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="writing-sample" class="py-24 px-6 bg-dark">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col items-center mb-16 text-center space-y-4">
+                    <h2 class="font-heading text-3xl md:text-4xl text-ivory tracking-wide">Writing Sample</h2>
+                    <div class="w-24 ornamental-divider"></div>
+                    <p class="text-muted max-w-2xl text-center">Demonstrating scene structure, dialogue formatting, character voice, and implementation of player agency.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    
+                    <!-- Script Container -->
+                    <div class="lg:col-span-8 script-container p-6 md:p-10 shadow-2xl rounded-sm border border-white/5">
+                        
+                        <div class="script-scene-heading">
+                            [PLACEHOLDER: EXT. / INT. LOCATION - TIME OF DAY]
+                        </div>
+                        
+                        <div class="script-action">
+                            [PLACEHOLDER: Stage directions. Describe the immediate sensory details, character blocking, or environmental state. Keep it succinct. E.g., The rain stops. [NPC_NAME] stands by the edge of the chasm, holding the artifact.]
+                        </div>
+
+                        <div class="script-character">[PLACEHOLDER: NPC NAME]</div>
+                        <div class="script-parenthetical">[PLACEHOLDER: (action or tone, e.g., turning slowly, exhausted)]</div>
+                        <div class="script-dialogue">
+                            [PLACEHOLDER: NPC Dialogue line. Keep the voice distinct. E.g., You survived the ascent. I suppose I owe the quartermaster ten coins.]
+                        </div>
+
+                        <div class="script-action border-t border-white/10 pt-4 mt-6">
+                            <span class="text-gold-500 font-sans text-xs uppercase tracking-widest">Player Options:</span>
+                        </div>
+
+                        <div class="script-player-option">
+                            1. [PLACEHOLDER: Empathy] "We both survived. That's what matters."
+                        </div>
+                        <div class="script-player-option">
+                            2. [PLACEHOLDER: Hostile] "Keep your coins. Hand over the artifact."
+                        </div>
+                        <div class="script-player-option">
+                            3. [PLACEHOLDER: Investigation/Conditional - Requires 'Letter'] "I read the orders. I know why you're here."
+                        </div>
+
+                        <div class="script-branch">
+                            >> IF PLAYER CHOOSES OPTION 3:
+                        </div>
+
+                        <div class="script-character">[PLACEHOLDER: NPC NAME]</div>
+                        <div class="script-parenthetical">[PLACEHOLDER: (eyes narrowing)]</div>
+                        <div class="script-dialogue">
+                            [PLACEHOLDER: Conditional response dialogue. E.g., Then you know I have no choice but to throw it into the abyss.]
+                        </div>
+                        
+                        <div class="script-designer-note flex flex-col md:flex-row gap-4 items-start">
+                            <i data-lucide="git-branch" class="w-5 h-5 text-gold-500 mt-1 shrink-0"></i>
+                            <div>
+                                <strong class="font-sans text-xs tracking-widest uppercase text-gold-400 block mb-1">Logic Node / Variable update:</strong>
+                                <span class="text-sm font-mono text-muted">[PLACEHOLDER: update_quest_state(Abyss_Confrontation, True); modify_reputation(NPC_NAME, -10)]</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Explanatory Panel -->
+                    <div class="lg:col-span-4 bg-surface border border-white/5 p-8 sticky top-32 space-y-8">
+                        <div>
+                            <h4 class="font-heading text-lg text-ivory mb-2">Scene Objective</h4>
+                            <p class="text-sm font-body text-muted leading-relaxed">
+                                [PLACEHOLDER: Explain what this scene needs to accomplish narratively and mechanically. E.g., Establish the villain's motivation while giving the player a chance to bypass combat.]
+                            </p>
+                        </div>
+                        
+                        <div class="border-t border-white/5 pt-6">
+                            <h4 class="font-heading text-lg text-ivory mb-2">Intended Player Experience</h4>
+                            <p class="text-sm font-body text-muted leading-relaxed">
+                                [PLACEHOLDER: How should the player feel? E.g., Tense, realizing their previous choice to spare a character has now backfired.]
+                            </p>
+                        </div>
+
+                        <div class="border-t border-white/5 pt-6">
+                            <h4 class="font-heading text-lg text-ivory mb-2 flex items-center">
+                                <i data-lucide="edit-3" class="w-4 h-4 mr-2 text-gold-500"></i> Revision Rationale
+                            </h4>
+                            <p class="text-sm font-body text-muted leading-relaxed">
+                                [PLACEHOLDER: Describe a change made during editing. E.g., "Initially, the NPC explained their entire plan here. I revised it to let the environment communicate the danger, shortening the dialogue to maintain pacing."]
+                            </p>
+                        </div>
+
+                        <a href="#" class="block text-center w-full py-4 mt-4 border border-gold-500/30 text-gold-400 hover:bg-gold-500 hover:text-dark transition-all font-sans tracking-widest uppercase text-xs font-bold">
+                            Read Full Script PDF
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-24 px-6 relative bg-surface border-y border-white/5">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+                
+                <!-- Left Column: Bio & Approach -->
+                <div class="space-y-8">
+                    <div class="flex items-center space-x-4 mb-8">
+                        <h2 class="font-heading text-3xl text-ivory">About the Author</h2>
+                        <span class="flex-1 h-[1px] bg-gradient-to-r from-gold-500/30 to-transparent"></span>
+                    </div>
+                    
+                    <div class="prose prose-invert prose-lg font-body text-muted leading-relaxed">
+                        <p>
+                            [Placeholder: Your short professional biography. State clearly who you are, what kind of games you write for, and your primary narrative strengths.]
+                        </p>
+                        <p>
+                            [Placeholder: Narrative Philosophy. Briefly explain how you approach storytelling in games. E.g., "I believe narrative isn't just text on a screen, but the context that gives gameplay mechanics meaning. I design branching systems that punish predictable choices and reward attentive players."]
+                        </p>
+                        <p>
+                            [Placeholder: Mention your specific interests in dark fantasy, RPG systems, or character-driven design.]
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Tools & Experience -->
+                <div class="space-y-12">
+                    
+                    <!-- Tools Section -->
+                    <div>
+                        <h4 class="font-heading text-gold-400 uppercase tracking-widest text-sm border-b border-white/10 pb-3 mb-6">Tools & Technical Workflow</h4>
+                        <ul class="grid grid-cols-2 gap-y-4 gap-x-2 text-sm font-sans text-muted">
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-gold-500/50 mr-2"></i> [PLACEHOLDER: Tool 1 (e.g., Twine/Ink)]</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-gold-500/50 mr-2"></i> [PLACEHOLDER: Tool 2 (e.g., Articy:Draft)]</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-gold-500/50 mr-2"></i> [PLACEHOLDER: Engine 1 (e.g., Unreal / Unity)]</li>
+                            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-gold-500/50 mr-2"></i> [PLACEHOLDER: Tool 4 (e.g., Jira/Confluence)]</li>
+                        </ul>
+                    </div>
+
+                    <!-- Development Experience -->
+                    <div>
+                        <h4 class="font-heading text-gold-400 uppercase tracking-widest text-sm border-b border-white/10 pb-3 mb-6">Game Development Experience</h4>
+                        <div class="space-y-6">
+                            <!-- Role 1 -->
+                            <div>
+                                <div class="flex justify-between items-baseline mb-1">
+                                    <h5 class="font-heading text-lg text-ivory">[PLACEHOLDER: Studio / Project Name]</h5>
+                                    <span class="text-xs font-sans text-muted">[PLACEHOLDER: 2023 - Present]</span>
+                                </div>
+                                <p class="text-xs font-sans text-crimson uppercase tracking-wider mb-2">[PLACEHOLDER: Narrative Designer]</p>
+                                <p class="text-sm font-body text-muted leading-relaxed">
+                                    [PLACEHOLDER: 1-2 sentences describing your specific contributions, e.g., Wrote 50k+ words of systemic dialogue, implemented branching quests.]
+                                </p>
+                            </div>
+                            
+                            <!-- Role 2 -->
+                            <div>
+                                <div class="flex justify-between items-baseline mb-1">
+                                    <h5 class="font-heading text-lg text-ivory">[PLACEHOLDER: Game Jam / Indie Team]</h5>
+                                    <span class="text-xs font-sans text-muted">[PLACEHOLDER: 2022]</span>
+                                </div>
+                                <p class="text-xs font-sans text-crimson uppercase tracking-wider mb-2">[PLACEHOLDER: Writer & Scripter]</p>
+                                <p class="text-sm font-body text-muted leading-relaxed">
+                                    [PLACEHOLDER: Description of what you built and shipped.]
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Links to Playable Games -->
+                    <div class="pt-4">
+                        <a href="#" class="inline-flex items-center text-ivory hover:text-gold-400 font-sans text-xs tracking-widest uppercase transition-colors group">
+                            <i data-lucide="external-link" class="w-4 h-4 mr-2 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform"></i>
+                            View Playable Prototypes on Itch.io
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-32 px-6 bg-dark relative flex flex-col items-center text-center">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(197,160,89,0.05)_0%,transparent_50%)] pointer-events-none"></div>
+            
+            <div class="max-w-2xl relative z-10 space-y-8">
+                <h2 class="font-heading text-4xl md:text-5xl text-ivory">Initiate Contact</h2>
+                <p class="font-body text-muted text-lg">
+                    [Placeholder: One sentence indicating your current availability for narrative design, contract writing, or studio roles.]
+                </p>
+                <div class="pt-8">
+                    <a href="mailto:placeholder@email.com" class="inline-flex items-center px-10 py-4 bg-gold-500 text-dark hover:bg-ivory transition-colors font-sans tracking-[0.2em] uppercase text-sm font-bold shadow-[0_0_20px_rgba(197,160,89,0.2)]">
+                        <i data-lucide="mail" class="w-4 h-4 mr-3"></i>
+                        Send Transmission
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-surface py-8 text-center border-t border-white/5">
+        <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8 mb-6">
+            <!-- Placeholder Social/Professional Links -->
+            <a href="#" class="text-muted hover:text-gold-400 transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i><span class="sr-only">LinkedIn</span></a>
+            <a href="#" class="text-muted hover:text-gold-400 transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i><span class="sr-only">Twitter</span></a>
+            <a href="#" class="text-muted hover:text-gold-400 transition-colors"><i data-lucide="gamepad-2" class="w-5 h-5"></i><span class="sr-only">Itch.io</span></a>
+        </div>
+        <p class="text-muted text-xs font-sans tracking-widest uppercase">
+            &copy; <span id="year">2026</span> Sai Srinivas Jammana. All Worlds Reserved.
+        </p>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Auto-update copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg', 'bg-dark/95');
+                navbar.classList.remove('glass-nav');
+            } else {
+                navbar.classList.remove('shadow-lg', 'bg-dark/95');
+                navbar.classList.add('glass-nav');
+            }
+        });
+
+        // Mobile Menu toggle logic
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        mobileBtn.addEventListener('click', toggleMenu);
+
+        // Close menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        function startBgCrossFade(totalImages, intervalMs) {
+            const front = document.getElementById("bg-front");
+            const back = document.getElementById("bg-back");
+            
+            let currentIdx = 1;
+            let isFrontActive = true;
+
+            // Set up the very first image
+            front.src = `Assets/Hero-Backgrounds/1.png`;
+
+            setInterval(() => {
+            // Calculate next image index
+            currentIdx = (currentIdx % totalImages) + 1;
+            const nextSrc = `Assets/Hero-Backgrounds/${currentIdx}.png`;
+
+            if (isFrontActive) {
+                // 1. Front is visible. Load next image onto Back layer.
+                back.src = nextSrc;
+                back.onload = () => {
+                // Cross-fade: Hide front, show back
+                front.classList.replace("opacity-100", "opacity-0");
+                back.classList.replace("opacity-0", "opacity-100");
+                isFrontActive = false; // Role swapped!
+                };
+            } else {
+                // 2. Back is visible. Load next image onto Front layer.
+                front.src = nextSrc;
+                front.onload = () => {
+                // Cross-fade: Hide back, show front
+                back.classList.replace("opacity-100", "opacity-0");
+                front.classList.replace("opacity-0", "opacity-100");
+                isFrontActive = true; // Role swapped!
+                };
+            }
+            }, intervalMs);
+        }
+        startBgCrossFade(6, 5000); 
+    </script>
+</body>
+</html>
