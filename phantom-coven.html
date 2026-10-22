@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0b0e">
+    <meta name="description" content="Phantom Coven — a dark-fantasy 100-wave roguelike concept and case study by Sai Srinivas Jammana.">
+    <title>Phantom Coven | Narrative Design — Sai Srinivas Jammana</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="case-study.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<main class="page" id="main-content">
+    <nav class="site-nav" aria-label="Main navigation">
+        <a class="wordmark" href="Index.html">Sai Srinivas Jammana<span class="wordmark-dot">.</span></a>
+        <a class="nav-back" href="Index.html#selected-work"><span aria-hidden="true">←</span> Selected Work</a>
+    </nav>
+
+    <header class="hero" style="--hero-image: url('Assets/images/phantom-coven.png')">
+        <div class="hero-shade"></div>
+        <div class="hero-content">
+            <p class="eyebrow"><span class="eyebrow-line"></span> Dark Fantasy / Narrative Design</p>
+            <h1>Phantom <em>Coven</em></h1>
+            <p class="hero-summary">A fallen necromantic bloodline, a changing gateway to the Abyss, and a 100-wave fight to restore a family the Solar Church wants erased.</p>
+            <div class="hero-meta"><span>Dark Fantasy</span><span>·</span><span>100-Wave Roguelike</span><span>·</span><span>Concept</span></div>
+        </div>
+        <div class="hero-index" aria-hidden="true">CASE STUDY <span>02</span></div>
+    </header>
+
+    <div class="content-grid">
+        <article class="main-column">
+            <section class="content-section" id="premise">
+                <p class="section-index">01 / The Core Idea</p>
+                <h2>The Premise</h2>
+                <p class="lead">The protagonist is the last heir of a fallen necromantic bloodline. The Solar Church seeks to eradicate what it considers evil and pursues the protagonist because of their necromantic nature.</p>
+                <p>Phantom Coven is a dark-fantasy, 100-wave roguelike. The protagonist begins the first run alone, while restoring the family becomes a major motivation for permanent progression across attempts.</p>
+                <div class="note"><span class="note-mark">!</span><p><strong>Development status</strong><br>This is a concept in development. The page distinguishes confirmed gameplay structure from narrative opportunities and unresolved story decisions.</p></div>
+            </section>
+
+            <section class="content-section" id="abyss">
+                <p class="section-index">02 / World &amp; Pressure</p>
+                <h2>The Abyss and Its Changing Gates</h2>
+                <p>The Abyss is a dangerous dimension whose gates appear at random locations in the real world. Because the gates change location, different creatures and groups can enter the Abyss over time rather than every run following one fixed route.</p>
+                <p>Souls do not dissipate in the Abyss. When sufficient soul energy gathers, it can form Eerie Orbs, the permanent progression currency used to unlock or resurrect family members and improve the protagonist and family members.</p>
+                <div class="fact-grid">
+                    <div class="fact-card"><span class="fact-label">World rule</span><p>Souls can accumulate in the Abyss instead of dissipating.</p></div>
+                    <div class="fact-card"><span class="fact-label">Progression link</span><p>Eerie Orbs connect that soul accumulation to family restoration and permanent upgrades.</p></div>
+                </div>
+            </section>
+
+            <section class="content-section" id="run-structure">
+                <p class="section-index">03 / Run Structure</p>
+                <h2>Persistent Progression Across 100 Waves</h2>
+                <p>Each run contains 100 enemy waves, with checkpoints every 10 waves. The first run begins with the protagonist alone. Family members are unlocked through permanent progression; once the sister is unlocked, the player can decide whether to include her in each new run, with the same team-selection principle applying to other unlocked family members.</p>
+                <p>Family members who die during a run cannot be resurrected during that run, but they remain available in later runs if they have already been permanently unlocked. Resources earned in previous runs carry forward, so attempts build on one another rather than resetting all progress.</p>
+                <p>The intended difficulty is challenging. An average player may need to unlock and upgrade the entire family to reach wave 100, while highly skilled players may succeed earlier.</p>
+            </section>
+
+            <section class="content-section" id="family-system">
+                <p class="section-index">04 / Character &amp; Combat Design</p>
+                <h2>The Family as a Combat System</h2>
+                <p>Family restoration is both a narrative motivation and a team-building system. Each unlocked member changes the possible run composition and the way the player can respond to pressure.</p>
+                <p>The sister is a playable tank and protector unlocked through permanent progression; she is not available at the beginning of the game. Her confirmed abilities are:</p>
+                <div class="process-card">
+                    <div class="process-number">01</div>
+                    <div class="process-body"><h3>Shield Bash</h3><p>She dashes forward while striking with her shield.</p></div>
+                </div>
+                <div class="process-card">
+                    <div class="process-number">02</div>
+                    <div class="process-body"><h3>Shield Slam</h3><p>She creates dark vines and stuns nearby enemies.</p></div>
+                </div>
+                <div class="process-card">
+                    <div class="process-number">03</div>
+                    <div class="process-body"><h3>Protective Shield</h3><p>She provides 15% damage reduction while protecting others.</p></div>
+                </div>
+                <div class="process-card">
+                    <div class="process-number">04</div>
+                    <div class="process-body"><h3>Boss Protection</h3><p>During boss battles, she shares this protective effect with every family member.</p></div>
+                </div>
+            </section>
+
+            <section class="content-section" id="progression">
+                <p class="section-index">05 / Resource Design</p>
+                <h2>Two Layers of Progression</h2>
+                <p><strong>Eerie Orbs</strong> are a permanent currency associated with the accumulation of souls in the Abyss. They are used to unlock or resurrect family members and to fund permanent upgrades for the protagonist and family members.</p>
+                <p><strong>Temporary combat energy</strong> is gained from defeated enemies and fills a bar during the current run. It is spent to summon combat support:</p>
+                <ol class="quest-list">
+                    <li><span class="quest-step">30%</span><div><h3>Mindless Mobs</h3><p>Pressing <code>1</code> summons mobs that tank damage and protect endangered family members.</p></div><span class="quest-status">Run resource</span></li>
+                    <li><span class="quest-step">50%</span><div><h3>Combat Units</h3><p>Pressing <code>2</code> summons combat-capable units such as equipped skeletons or dead paladins.</p></div><span class="quest-status">Run resource</span></li>
+                    <li><span class="quest-step">80%</span><div><h3>Guardian Monster</h3><p>Pressing <code>3</code> summons either of the family's two Guardian Monsters. Their stats are comparable to family members, and they excel at clearing groups.</p></div><span class="quest-status">Run resource</span></li>
+                    <li><span class="quest-step">90%</span><div><h3>Emergency Mobs</h3><p>Pressing <code>1</code> can still summon mindless mobs, reducing energy to 60%.</p></div><span class="quest-status">Run resource</span></li>
+                </ol>
+                <div class="design-takeaway"><span class="takeaway-icon" aria-hidden="true">✦</span><div><h3>Why separate the resources?</h3><p>Eerie Orbs support long-term family restoration, while temporary energy creates moment-to-moment tactical decisions. These are gameplay systems, not events that necessarily occur in the story.</p></div></div>
+            </section>
+
+            <section class="content-section" id="narrative-opportunities">
+                <p class="section-index">06 / Narrative Direction</p>
+                <h2>Narrative Opportunities</h2>
+                <p>The Abyss's persistent souls create an opportunity for environmental storytelling. Memories of those who died there could shape how the player understands the dimension, its gates, and the history surrounding the family.</p>
+                <p>This is a direction under consideration, not a confirmed memory system or established body of lore. The Solar Church remains the larger external threat, while the protagonist's necromantic abilities and family history keep them in conflict with it.</p>
+            </section>
+
+            <section class="content-section" id="next-steps">
+                <p class="section-index">07 / Open Design Questions</p>
+                <h2>Design Challenges and Next Steps</h2>
+                <p>The central challenge is balancing a difficult 100-wave structure with progression that feels meaningful without making every run feel identical. Checkpoints, persistent resources, team selection, and family-member deaths need to create pressure while still giving the player reasons to attempt another run.</p>
+                <p>The next steps are to define how gates and wave composition create variety, clarify the family's full upgrade structure, and decide how much of the Abyss's soul-based environmental storytelling belongs in the finished concept. The Church's deeper motives, any final confrontation, and a definitive ending remain unresolved.</p>
+            </section>
+        </article>
+
+        <aside class="side-column" aria-label="Case study notes">
+            <div class="side-card side-sticky">
+                <p class="side-kicker">At a glance</p>
+                <h2>Design Focus</h2>
+                <ul class="tag-list"><li>100-Wave Structure</li><li>Persistent Progression</li><li>Family Team Design</li><li>Faction Conflict</li><li>Resource Systems</li></ul>
+                <div class="side-divider"></div>
+                <p class="side-kicker">Central question</p>
+                <p class="side-question">How can family restoration make a difficult roguelike run feel narratively meaningful as well as strategically demanding?</p>
+                <div class="side-divider"></div>
+                <p class="side-kicker">Current status</p>
+                <p class="status-line"><span class="status-dot"></span> Concept in development</p>
+                <p class="side-small">Systems and narrative opportunities are exploratory. No implementation or playtesting is claimed on this page.</p>
+            </div>
+            <div class="side-card art-card">
+                <p class="side-kicker">Supporting Art</p>
+                <img src="Assets/images/phantom-coven.png" alt="Illustrative concept artwork for Phantom Coven" loading="lazy">
+                <p class="image-caption">Illustrative concept art for the project—not a screenshot from a playable game.</p>
+            </div>
+            <div class="side-card next-card">
+                <p class="side-kicker">Next development step</p>
+                <h2>Test the Run Loop</h2>
+                <p>Clarify wave variety, family composition, resource thresholds, and the role of checkpoints before expanding the narrative layer.</p>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="page-footer">
+        <a class="back-link" href="Index.html#selected-work"><span aria-hidden="true">←</span> Back to selected work</a>
+        <p>Designed and written by Sai Srinivas Jammana</p>
+    </footer>
+</main>
+</body>
+</html>
