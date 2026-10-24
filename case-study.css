@@ -272,7 +272,7 @@ body:has(.site-nav) .side-column {min-width: 0;}
 body:has(.site-nav) .side-card {padding: 22px; border: 1px solid var(--border); background: var(--surface); margin-bottom: 18px;}
 
 
-body:has(.site-nav) .side-sticky {position: sticky; top: 24px;}
+body:has(.site-nav) .side-sticky {position: static;}
 
 
 body:has(.site-nav) .side-kicker {font-size: .62rem; margin-bottom: 10px;}
@@ -411,5 +411,3 @@ html {scroll-behavior: auto;}
 * {transition: none !important;}
  
 }
-
-
